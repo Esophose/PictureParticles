@@ -1,0 +1,78 @@
+# __________ __        __                      __________                __   __        __                  
+# \______   \__| _____/  |_ __ _________   ____\______   \_____ ________/  |_|__| ____ |  |   ____   ______ 
+#  |     ___/  |/ ___\   __\  |  \_  __ \_/ __ \|     ___/\__  \\_  __ \   __\  |/ ___\|  | _/ __ \ /  ___/ 
+#  |    |   |  \  \___|  | |  |  /|  | \/\  ___/|    |     / __ \|  | \/|  | |  \  \___|  |_\  ___/ \___ \  
+#  |____|   |__|\___  >__| |____/ |__|    \___  >____|    (____  /__|   |__| |__|\___  >____/\___  >____  > 
+#                   \/                        \/               \/                    \/          \/     \/  
+
+# =================================================== #
+#               PictureParticles Config               #
+#              Welcome to the beginning!              #
+# =================================================== #
+
+# This value is the version of the plugin that last modified the config file
+# Changing this value will reset your config on the next server reload / restart. 
+# I don't recommend changing it
+version: 1.0
+
+# Check for new versions of the plugin
+# NOTE: This is not functional for the first plugin release
+# Default: true
+check-updates: true
+
+# The .lang file to use in the ./lang/ folder
+# Default: 'default.lang'
+lang-file: 'default.lang'
+
+# If you're using other plugins to execute commands you may wish to turn off messages
+# Default: true
+messages-enabled: true
+
+# Whether or not to use the message-prefix field when displaying messages
+# Default: true
+use-message-prefix: true
+
+# The prefix to use for all PictureParticle messages
+# This is useless if use-message-prefix is set to false
+# Default: '&7[&3PictureParticles&7]'
+message-prefix: '&7[&3PictureParticles&7]'
+
+# ================================================================ #
+#                     DATABASE CONFIGURATION                       #
+# Information:                                                     #
+# * This is meant for people who have multiple servers connected   #
+#   together through BungeeCord. Unless you have multiple servers, #
+#   it is recommended to keep the database storage disabled for    #
+#   the best performance!                                          #
+# ================================================================ #
+
+# Enable Database
+# Default: false
+database-enable: false
+
+# ------------------------------------------------------------------- #
+# The following are only required if database-enable is set to 'true' #
+# ------------------------------------------------------------------- #
+
+# Database Hostname
+# Default: ''
+database-hostname: ''
+
+# Database Port
+# Default: 3306
+database-port: 3306
+
+# Database Name
+# Default: ''
+database-name: ''
+
+# Database User Name
+# Default: ''
+database-user-name: ''
+
+# Database User Password
+# Default: ''
+database-user-password: ''
+
+# That's everything! You reached the end of the configuration.
+# Enjoy the plugin!

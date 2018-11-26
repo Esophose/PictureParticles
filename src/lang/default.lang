@@ -1,0 +1,16 @@
+# ================================================================ #
+#           default.lang (English) MESSAGE CONFIGURATION           #
+# Important Notes:                                                 #
+# * You can use the & symbol to color the messages                 #
+# * {#} Will be replaced with whatever that message requires       #
+# * Do NOT use the apostrophe character in any message! ( ' )      #
+# * PLEASE MAKE YOUR OWN .lang FILE IF YOU WANT CUSTOM MESSAGES!   #
+# * This file will be overridden almost every plugin update!       #
+# ================================================================ #
+
+# Command Errors
+command-error-no-permission: '&cYou do not have access to use this plugin!'
+command-error-unknown: '&cUnknown command, use &b/pip help &cfor a list of commands.'
+
+# Command Descriptions
+command-description-create: 'Create a new picture'
