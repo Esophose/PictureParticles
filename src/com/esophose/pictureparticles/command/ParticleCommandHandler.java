@@ -61,8 +61,8 @@ public class ParticleCommandHandler implements CommandExecutor, TabCompleter {
     }
 
     /**
-     * Called when a player executes a /pp command
-     * Checks what /pp command it is and calls the corresponding module
+     * Called when a player executes a /pip command
+     * Checks what /pip command it is and calls the corresponding module
      * 
      * @param sender Who executed the command
      * @param cmd The command
@@ -89,7 +89,7 @@ public class ParticleCommandHandler implements CommandExecutor, TabCompleter {
     }
 
     /**
-     * Activated when a user pushes tab in chat prefixed with /pp
+     * Activated when a user pushes tab in chat prefixed with /pip
      * 
      * @param sender The sender that hit tab, should always be a player
      * @param cmd The command the player is executing
@@ -100,7 +100,7 @@ public class ParticleCommandHandler implements CommandExecutor, TabCompleter {
     public List<String> onTabComplete(CommandSender sender, Command cmd, String alias, String[] args) {
         if (!(sender instanceof Player)) return new ArrayList<String>();
 
-        if (cmd.getName().equalsIgnoreCase("pp")) {
+        if (cmd.getName().equalsIgnoreCase("pip")) {
             if (args.length <= 1) {
                 CommandModule commandModule = findMatchingCommand(""); // Get the default command module
                 return commandModule.onTabComplete((Player) sender, args);
