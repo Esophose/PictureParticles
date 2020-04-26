@@ -1,0 +1,29 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
+plugins {
+    id 'java'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+compileJava.options.encoding = 'UTF-8'
+group = 'dev.esophose'
+version = '1.0'
+
+repositories {
+    mavenCentral()
+	jcenter()
+	
+    maven { url = 'https://repo.codemc.org/repository/nms' }
+}
+
+dependencies {
+    implementation 'org.spigotmc:spigot:1.15.2-R0.1-SNAPSHOT'
+}
+
+processResources {
+    from (sourceSets.main.resources.srcDirs) {
+        include '**/*.yml'
+        filter ReplaceTokens, tokens: ["version": project.property("version")]
+    }
+}

@@ -1,18 +1,16 @@
-package com.esophose.pictureparticles.manager;
+package dev.esophose.pictureparticles.manager;
 
+import dev.esophose.pictureparticles.PictureParticles;
+import dev.esophose.pictureparticles.manager.SettingManager.PSetting;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.MessageFormat;
-
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-
-import com.esophose.pictureparticles.PictureParticles;
-import com.esophose.pictureparticles.manager.SettingManager.PSetting;
 
 public class LangManager {
 
@@ -20,12 +18,15 @@ public class LangManager {
      * Contains the location in the .lang file of every chat message
      */
     public static enum Lang { // @formatter:off
-        
+
         // Command Errors
         COMMAND_ERROR_NO_PERMISSION,
         COMMAND_ERROR_UNKNOWN,
-        
+
         // Command Descriptions
+        COMMAND_DESCRIPTIONS_USAGE,
+        COMMAND_DESCRIPTIONS_HELP_1,
+        COMMAND_DESCRIPTIONS_HELP_2,
         COMMAND_DESCRIPTION_CREATE; // @formatter:on
 
         private String message;
@@ -36,7 +37,7 @@ public class LangManager {
 
         /**
          * Sets the message from the lang file
-         * 
+         *
          * @param langFile The lang file to pull the message from
          */
         private void setMessage(YamlConfiguration langFile) {
@@ -51,7 +52,7 @@ public class LangManager {
 
         /**
          * Gets the message this enum represents
-         * 
+         *
          * @param replacements The replacements for the message
          * @return The message with the replacements applied
          */
@@ -59,14 +60,14 @@ public class LangManager {
             return new MessageFormat(this.message).format(replacements);
         }
     }
-    
+
     /**
      * The current lang file name
      */
     private static String langFileName;
-    
+
     private LangManager() {
-        
+
     }
 
     /**
@@ -84,14 +85,14 @@ public class LangManager {
      * Loads the target .lang file as defined in the config and grabs its YamlConfiguration
      * If it doesn't exist, default to default.lang
      * If default.lang doesn't exist, copy the file from this .jar to the target directory
-     * 
+     *
      * @return The YamlConfiguration of the target .lang file
      */
     private static YamlConfiguration configureLangFile(boolean resetLangFile) {
         File pluginDataFolder = PictureParticles.getPlugin().getDataFolder();
         langFileName = PSetting.LANG_FILE.getString();
         File targetLangFile = new File(pluginDataFolder.getAbsolutePath() + "/lang/" + langFileName);
-        
+
         if (resetLangFile) {
             File defaultLangFile = new File(pluginDataFolder.getAbsolutePath() + "/lang/default.lang");
             if (defaultLangFile.exists()) {
@@ -125,8 +126,8 @@ public class LangManager {
 
     /**
      * Gets a formatted and replaced message
-     * 
-     * @param messageType The message type to get
+     *
+     * @param messageType  The message type to get
      * @param replacements The replacements fot the message
      * @return The Lang in text form with its replacements applied
      */
@@ -136,9 +137,9 @@ public class LangManager {
 
     /**
      * Sends a message to the given player
-     * 
-     * @param player The player to send the message to
-     * @param messageType The message to send to the player
+     *
+     * @param player       The player to send the message to
+     * @param messageType  The message to send to the player
      * @param replacements The replacements for the message
      */
     public static void sendMessage(Player player, Lang messageType, Object... replacements) {
@@ -160,8 +161,8 @@ public class LangManager {
     /**
      * Sends a custom message to a player
      * Used in cases of string building
-     * 
-     * @param player The player to send the message to
+     *
+     * @param player  The player to send the message to
      * @param message The message to send to the player
      */
     public static void sendCustomMessage(Player player, String message) {
@@ -177,8 +178,27 @@ public class LangManager {
     }
 
     /**
+     * Sends a message to a Player without the prefix
+     *
+     * @param player       The player to send the message to
+     * @param messageType  The message type to send the player
+     * @param replacements The replacements for the message
+     */
+    public static void sendSimpleMessage(Player player, Lang messageType, Object... replacements) {
+        if (!PSetting.MESSAGES_ENABLED.getBoolean()) return;
+
+        String message = messageType.get(replacements);
+
+        if (message.length() == 0) return;
+
+        if (message.trim().equals("")) return;
+
+        player.sendMessage(message);
+    }
+
+    /**
      * Translates all ampersand symbols into the Minecraft chat color symbol
-     * 
+     *
      * @param message The input string
      * @return The output string, parsed
      */

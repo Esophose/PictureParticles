@@ -1,4 +1,0 @@
-== UPDATING WILL DELETE YOUR CONFIG.YML ==
-* Create a backup of your config.yml if you wish to import all your old settings!
-=== v1.0 ===
-* First update

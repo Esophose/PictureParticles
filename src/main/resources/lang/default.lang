@@ -13,4 +13,7 @@ command-error-no-permission: '&cYou do not have access to use this plugin!'
 command-error-unknown: '&cUnknown command, use &b/pip help &cfor a list of commands.'
 
 # Command Descriptions
+command-descriptions-usage: '&e/pip {0} {1}'
+command-descriptions-help-1: '&7> &b/pip {0} &e- {1}'
+command-descriptions-help-2: '&7> &b/pip {0} {1} &e- {2}'
 command-description-create: 'Create a new picture'

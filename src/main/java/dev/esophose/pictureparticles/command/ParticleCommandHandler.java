@@ -1,17 +1,15 @@
-package com.esophose.pictureparticles.command;
+package dev.esophose.pictureparticles.command;
 
+import dev.esophose.pictureparticles.manager.LangManager;
+import dev.esophose.pictureparticles.manager.LangManager.Lang;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
-
-import com.esophose.pictureparticles.manager.LangManager;
-import com.esophose.pictureparticles.manager.LangManager.Lang;
 
 public class ParticleCommandHandler implements CommandExecutor, TabCompleter {
 
@@ -21,27 +19,28 @@ public class ParticleCommandHandler implements CommandExecutor, TabCompleter {
     private static List<CommandModule> commands;
 
     static {
-        commands = new ArrayList<CommandModule>();
+        commands = new ArrayList<>();
 
         commands.add(new CreateCommandModule());
+        commands.add(new DefaultCommandModule());
     }
 
     /**
      * Finds a matching CommandModule by its name
-     * 
+     *
      * @param commandName The command name
      * @return The found CommandModule, otherwise null
      */
     public static CommandModule findMatchingCommand(String commandName) {
         for (CommandModule commandModule : commands)
-            if (commandModule.getName().equalsIgnoreCase(commandName)) 
+            if (commandModule.getName().equalsIgnoreCase(commandName))
                 return commandModule;
         return null;
     }
 
     /**
      * Get a list of all available commands
-     * 
+     *
      * @return A List of all CommandModules registered
      */
     public static List<CommandModule> getCommands() {
@@ -50,7 +49,7 @@ public class ParticleCommandHandler implements CommandExecutor, TabCompleter {
 
     /**
      * Get all available command names
-     * 
+     *
      * @return All available command names
      */
     public static List<String> getCommandNames() {
@@ -63,17 +62,17 @@ public class ParticleCommandHandler implements CommandExecutor, TabCompleter {
     /**
      * Called when a player executes a /pip command
      * Checks what /pip command it is and calls the corresponding module
-     * 
+     *
      * @param sender Who executed the command
-     * @param cmd The command
-     * @param label The command label
-     * @param args The arguments following the command
+     * @param cmd    The command
+     * @param label  The command label
+     * @param args   The arguments following the command
      * @return true
      */
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (!(sender instanceof Player)) return true;
         Player player = (Player) sender;
-        
+
         String commandName = args.length > 0 ? args[0] : "";
         CommandModule commandModule = findMatchingCommand(commandName);
 
@@ -90,11 +89,11 @@ public class ParticleCommandHandler implements CommandExecutor, TabCompleter {
 
     /**
      * Activated when a user pushes tab in chat prefixed with /pip
-     * 
+     *
      * @param sender The sender that hit tab, should always be a player
-     * @param cmd The command the player is executing
-     * @param alias The possible alias for the command
-     * @param args All arguments following the command
+     * @param cmd    The command the player is executing
+     * @param alias  The possible alias for the command
+     * @param args   All arguments following the command
      * @return A list of commands available to the sender
      */
     public List<String> onTabComplete(CommandSender sender, Command cmd, String alias, String[] args) {

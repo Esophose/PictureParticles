@@ -1,5 +1,11 @@
-package com.esophose.pictureparticles.command;
+package dev.esophose.pictureparticles.command;
 
+import dev.esophose.pictureparticles.PictureParticles;
+import dev.esophose.pictureparticles.image.ParticleImage;
+import dev.esophose.pictureparticles.image.PngParticleImage;
+import dev.esophose.pictureparticles.image.TextParticleImage;
+import dev.esophose.pictureparticles.manager.LangManager.Lang;
+import dev.esophose.pictureparticles.manager.ParticleManager;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -7,31 +13,25 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.imageio.ImageIO;
-
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-
-import com.esophose.pictureparticles.PictureParticles;
-import com.esophose.pictureparticles.image.RenderableParticleImage;
-import com.esophose.pictureparticles.manager.LangManager.Lang;
-import com.esophose.pictureparticles.manager.ParticleManager;
 
 public class CreateCommandModule implements CommandModule {
 
     public void onCommandExecute(Player player, String[] args) {
+//        ParticleImage particleImage = new TextParticleImage(String.join(" ", args), player.getLocation().clone().add(0, 1, 0), 0.1f, 1f);
+//        ParticleManager.getImages().add(particleImage);
+
         String fileName = args[0];
 
         try (InputStream inputStream = new FileInputStream(PictureParticles.getPlugin().getDataFolder().getAbsolutePath() + "/images/" + fileName)) {
-            if (inputStream != null) {
-                BufferedImage image = ImageIO.read(inputStream);
-                RenderableParticleImage particleImage = new RenderableParticleImage(image, player.getLocation().clone().add(0, 1, 0), 0.1f, 1f);
-                ParticleManager.getImages().add(particleImage);
-            }
+            BufferedImage image = ImageIO.read(inputStream);
+            ParticleImage particleImage = new PngParticleImage(image, player.getLocation().clone().add(0, 1, 0), 0.1f, 1f);
+            ParticleManager.getImages().add(particleImage);
         } catch (IOException e) {
             e.printStackTrace();
-            
+
             if (e instanceof FileNotFoundException) {
                 player.sendMessage(ChatColor.RED + "File does not exist");
             }
@@ -39,7 +39,7 @@ public class CreateCommandModule implements CommandModule {
     }
 
     public List<String> onTabComplete(Player pplayer, String[] args) {
-        return new ArrayList<String>(); // TODO: Implement
+        return new ArrayList<>(); // TODO: Implement
     }
 
     public String getName() {
@@ -51,7 +51,7 @@ public class CreateCommandModule implements CommandModule {
     }
 
     public String getArguments() {
-        return "";
+        return "<imagePath>";
     }
 
 }
